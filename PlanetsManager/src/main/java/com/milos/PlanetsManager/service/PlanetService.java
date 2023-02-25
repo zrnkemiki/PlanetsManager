@@ -1,14 +1,18 @@
 package com.milos.PlanetsManager.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import java.util.List;
 
-import com.milos.PlanetsManager.repository.PlanetRepository;
+import com.milos.PlanetsManager.model.Planet;
 
-@Service
-public class PlanetService {
+public interface PlanetService {
 	
-	@Autowired
-	PlanetRepository planetRepository;
+	Planet savePlanet(Planet newPlanet);
+	List<Planet> fetchPlanetList();
+	Planet updatePlanet(Planet updatePlanet);
+	void deletePlanetById(Long planetId);
+	
+	
+	
+	
 
 }

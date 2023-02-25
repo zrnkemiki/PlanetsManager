@@ -1,14 +1,13 @@
 package com.milos.PlanetsManager.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import java.util.List;
 
-import com.milos.PlanetsManager.repository.SatelliteRepository;
+import com.milos.PlanetsManager.model.Satellite;
 
-@Service
-public class SatelliteService {
+public interface SatelliteService {
+	Satellite saveSatellite(Satellite newSatellite);
+	List<Satellite> fetchSatelliteList();
+	Satellite updateSatellite(Satellite updateSatellite);
+	void deleteSatellitetById(Long satelliteId);
 	
-	@Autowired
-	SatelliteRepository satelliteRepository;
-
 }
