@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -14,7 +16,7 @@ public class Satellite {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@Column(nullable=false)
+	@Column(nullable=false, unique=true)
 	private String name;
 	@Column(nullable=false)
 	private Long surfaceArea;
@@ -25,13 +27,13 @@ public class Satellite {
 	public Satellite() {
 	}
 
-	public Satellite(Long id, String name, Long surfaceArea, Long mass, Boolean naturalSatelitte) {
+	public Satellite(Long id, String name, Long surfaceArea, Long mass, Boolean naturalSatellite) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.surfaceArea = surfaceArea;
 		this.mass = mass;
-		this.naturalSatellite = naturalSatelitte;
+		this.naturalSatellite = naturalSatellite;
 	}
 
 	public Long getId() {
@@ -66,12 +68,14 @@ public class Satellite {
 		this.mass = mass;
 	}
 
-	public Boolean getNaturalSatelitte() {
+	public Boolean getNaturalSatellite() {
 		return naturalSatellite;
 	}
 
-	public void setNaturalSatelitte(Boolean naturalSatelitte) {
-		this.naturalSatellite = naturalSatelitte;
+	public void setNaturalSatellite(Boolean naturalSatellite) {
+		this.naturalSatellite = naturalSatellite;
 	}
 
+
+	
 }
