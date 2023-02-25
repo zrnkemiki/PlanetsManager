@@ -1,15 +1,15 @@
 package com.milos.PlanetsManager.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -28,15 +28,19 @@ public class Planet {
 	private Long mass;
 	@Column(nullable=false)
 	private Long distanceFromSun;
+	@Column
 	private Integer averageSurfaceTemperature;
 	@OneToMany(cascade = CascadeType.ALL)
-	private List<Satellite> satellites = new ArrayList<>();
-
+	@JoinColumn(name = "planet_id", referencedColumnName = "id")
+	private Set<Satellite> satellites = new HashSet<Satellite>();
+	
+	
 	public Planet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
-
 	public Planet(Long id, String name, Long surfaceArea, Long mass, Long distanceFromSun,
-			Integer averageSurfaceTemperature, List<Satellite> satellites) {
+			Integer averageSurfaceTemperature, Set<Satellite> satellites) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -46,62 +50,49 @@ public class Planet {
 		this.averageSurfaceTemperature = averageSurfaceTemperature;
 		this.satellites = satellites;
 	}
-
 	public Long getId() {
 		return id;
 	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	public Long getSurfaceArea() {
 		return surfaceArea;
 	}
-
 	public void setSurfaceArea(Long surfaceArea) {
 		this.surfaceArea = surfaceArea;
 	}
-
 	public Long getMass() {
 		return mass;
 	}
-
 	public void setMass(Long mass) {
 		this.mass = mass;
 	}
-
 	public Long getDistanceFromSun() {
 		return distanceFromSun;
 	}
-
 	public void setDistanceFromSun(Long distanceFromSun) {
 		this.distanceFromSun = distanceFromSun;
 	}
-
 	public Integer getAverageSurfaceTemperature() {
 		return averageSurfaceTemperature;
 	}
-
 	public void setAverageSurfaceTemperature(Integer averageSurfaceTemperature) {
 		this.averageSurfaceTemperature = averageSurfaceTemperature;
 	}
-
-	public List<Satellite> getSatellites() {
+	public Set<Satellite> getSatellites() {
 		return satellites;
 	}
-
-	public void setSatellites(List<Satellite> satellites) {
+	public void setSatellites(Set<Satellite> satellites) {
 		this.satellites = satellites;
 	}
-
 	
+	
+
 }

@@ -9,9 +9,9 @@ import com.milos.PlanetsManager.serviceImpl.PlanetServiceImpl;
 @RestController
 @RequestMapping("/planet")
 public class PlanetController {
-	
+
 	@Autowired
 	PlanetServiceImpl planetService;
-	
+
 	
 }

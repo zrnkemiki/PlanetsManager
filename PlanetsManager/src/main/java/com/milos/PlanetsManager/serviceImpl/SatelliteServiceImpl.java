@@ -2,14 +2,19 @@ package com.milos.PlanetsManager.serviceImpl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.milos.PlanetsManager.model.Satellite;
+import com.milos.PlanetsManager.repository.SatelliteRepository;
 import com.milos.PlanetsManager.service.SatelliteService;
 
 @Service
 public class SatelliteServiceImpl implements SatelliteService {
 
+	@Autowired
+	SatelliteRepository satelliteRepository;
+	
 	@Override
 	public Satellite saveSatellite(Satellite newSatellite) {
 		// TODO Auto-generated method stub
@@ -31,7 +36,7 @@ public class SatelliteServiceImpl implements SatelliteService {
 	@Override
 	public void deleteSatellitetById(Long satelliteId) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

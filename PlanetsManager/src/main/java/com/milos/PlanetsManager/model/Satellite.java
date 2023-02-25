@@ -16,12 +16,13 @@ public class Satellite {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@Column(nullable=false, unique=true)
+	@Column(nullable = false, unique = true)
 	private String name;
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private Long surfaceArea;
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private Long mass;
+	@Column
 	private Boolean naturalSatellite;
 
 	public Satellite() {
@@ -76,6 +77,4 @@ public class Satellite {
 		this.naturalSatellite = naturalSatellite;
 	}
 
-
-	
 }
