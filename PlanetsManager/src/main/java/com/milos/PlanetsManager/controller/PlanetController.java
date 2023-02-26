@@ -1,6 +1,9 @@
 package com.milos.PlanetsManager.controller;
 
 import java.util.List;
+import java.util.Set;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.milos.PlanetsManager.exception.EntityAlreadyExistsException;
 import com.milos.PlanetsManager.exception.EntityDoesNotExistException;
 import com.milos.PlanetsManager.model.Planet;
+import com.milos.PlanetsManager.model.Satellite;
 import com.milos.PlanetsManager.serviceImpl.PlanetServiceImpl;
 
 @RestController
@@ -28,7 +32,7 @@ public class PlanetController {
 	PlanetServiceImpl planetService;
 
 	@PostMapping
-	public ResponseEntity<Planet> createPlanet(@RequestBody Planet newPlanet) {
+	public ResponseEntity<Planet> createPlanet(@Valid @RequestBody Planet newPlanet) {
 		Planet planet = planetService.savePlanet(newPlanet);
 		return new ResponseEntity<Planet>(planet, HttpStatus.CREATED);
 	}
@@ -45,8 +49,17 @@ public class PlanetController {
 
 	}
 
+	@GetMapping(value = "/{id}/satellites")
+	public ResponseEntity<Set<Satellite>> fetchPlanetSatellites(@PathVariable("id") Long planetId)
+			throws EntityDoesNotExistException {
+		Set<Satellite> satellites = planetService.fetchPlanetSatellites(planetId);
+		return new ResponseEntity<Set<Satellite>>(satellites, HttpStatus.OK);
+
+	}
+
 	@PutMapping
-	public ResponseEntity<Planet> updatePlanet(@RequestBody Planet updatePlanet) throws EntityDoesNotExistException {
+	public ResponseEntity<Planet> updatePlanet(@Valid @RequestBody Planet updatePlanet)
+			throws EntityDoesNotExistException {
 		Planet updatedPlanet = planetService.updatePlanet(updatePlanet);
 		return new ResponseEntity<Planet>(updatedPlanet, HttpStatus.OK);
 
@@ -55,7 +68,7 @@ public class PlanetController {
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Object> deletePlanet(@PathVariable("id") Long planetId) throws EntityDoesNotExistException {
 		planetService.deletePlanetById(planetId);
-		return new ResponseEntity<>(HttpStatus.OK);
+		return new ResponseEntity<>("Planet deleted successfully", HttpStatus.OK);
 	}
 
 	@ExceptionHandler(value = EntityAlreadyExistsException.class)

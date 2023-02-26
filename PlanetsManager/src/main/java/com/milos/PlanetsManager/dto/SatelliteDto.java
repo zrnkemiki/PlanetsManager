@@ -1,10 +1,16 @@
 package com.milos.PlanetsManager.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class SatelliteDto {
 
 	private Long id;
+	@NotBlank(message = "Satellite name field may not be blank!")
 	private String name;
+	@NotNull(message = "Satellite surfaceArea field may not be blank!")
 	private Long surfaceArea;
+	@NotNull(message = "Satellite mass field may not be blank!")
 	private Long mass;
 	private Boolean naturalSatellite;
 	private Long planetId;

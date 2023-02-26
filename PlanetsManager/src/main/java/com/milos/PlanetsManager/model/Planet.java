@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.milos.PlanetsManager.dto.PlanetDto;
 
@@ -22,13 +24,13 @@ public class Planet {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@Column(nullable = false, unique = true)
+	@NotBlank(message = "Planet name field may not be blank!")
 	private String name;
-	@Column(nullable = false)
+	@NotNull(message = "Planet surfaceArea field may not be blank!")
 	private Long surfaceArea;
-	@Column(nullable = false)
+	@NotNull(message = "Planet mass field may not be blank!")
 	private Long mass;
-	@Column(nullable = false)
+	@NotNull(message = "Planet distanceFromSun field may not be blank!")
 	private Long distanceFromSun;
 	@Column
 	private Integer averageSurfaceTemperature;

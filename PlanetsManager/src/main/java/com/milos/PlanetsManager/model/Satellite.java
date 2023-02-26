@@ -6,6 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import com.milos.PlanetsManager.dto.SatelliteDto;
 
 @Entity
 @Table(name = "satellites")
@@ -14,11 +18,11 @@ public class Satellite {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@Column(nullable = false)
+	@NotBlank(message = "Satellite name field may not be blank!")
 	private String name;
-	@Column(nullable = false)
+	@NotNull(message = "Satellite surfaceArea field may not be blank!")
 	private Long surfaceArea;
-	@Column(nullable = false)
+	@NotNull(message = "Satellite mass field may not be blank!")
 	private Long mass;
 	@Column
 	private Boolean naturalSatellite;
@@ -33,6 +37,14 @@ public class Satellite {
 		this.surfaceArea = surfaceArea;
 		this.mass = mass;
 		this.naturalSatellite = naturalSatellite;
+	}
+
+	public Satellite(SatelliteDto satelliteDto) {
+		this.id = satelliteDto.getId();
+		this.name = satelliteDto.getName();
+		this.surfaceArea = satelliteDto.getSurfaceArea();
+		this.mass = satelliteDto.getMass();
+		this.naturalSatellite = satelliteDto.getNaturalSatellite();
 	}
 
 	public Long getId() {

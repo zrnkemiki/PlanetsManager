@@ -2,6 +2,7 @@ package com.milos.PlanetsManager.serviceImpl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.milos.PlanetsManager.exception.EntityAlreadyExistsException;
 import com.milos.PlanetsManager.exception.EntityDoesNotExistException;
 import com.milos.PlanetsManager.model.Planet;
+import com.milos.PlanetsManager.model.Satellite;
 import com.milos.PlanetsManager.repository.PlanetRepository;
 import com.milos.PlanetsManager.service.PlanetService;
 
@@ -59,9 +61,19 @@ public class PlanetServiceImpl implements PlanetService {
 	public Planet fetchPlanetById(Long planetId) throws EntityDoesNotExistException {
 		Optional<Planet> planet = planetRepository.findById(planetId);
 		if (planet.isEmpty()) {
-			throw new EntityDoesNotExistException(HttpStatus.BAD_REQUEST, "Planet with given ID does not exist!");
+			throw new EntityDoesNotExistException(HttpStatus.BAD_REQUEST, "Planet with the given ID does not exist!");
 		}
 		return planet.get();
+
+	}
+
+	@Override
+	public Set<Satellite> fetchPlanetSatellites(Long planetId) throws EntityDoesNotExistException {
+		Optional<Planet> planet = planetRepository.findById(planetId);
+		if (planet.isEmpty()) {
+			throw new EntityDoesNotExistException(HttpStatus.BAD_REQUEST, "Planet with the given ID does not exist!");
+		}
+		return planet.get().getSatellites();
 
 	}
 
