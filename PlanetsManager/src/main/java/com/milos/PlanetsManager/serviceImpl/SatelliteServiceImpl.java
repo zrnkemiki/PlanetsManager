@@ -37,9 +37,8 @@ public class SatelliteServiceImpl implements SatelliteService {
 	}
 
 	@Override
-	public List<Satellite> fetchSatelliteList() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Satellite> fetchSatellits() {
+		return satelliteRepository.findAll();
 	}
 
 	@Override
