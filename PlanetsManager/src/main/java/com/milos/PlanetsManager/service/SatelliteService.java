@@ -13,7 +13,7 @@ public interface SatelliteService {
 	
 	Satellite fetchSatelliteById(Long satelliteId) throws EntityDoesNotExistException;
 
-	Satellite updateSatellite(Satellite updateSatellite);
+	Satellite updateSatellite(Satellite updateSatellite) throws EntityDoesNotExistException;
 
 	void deleteSatellitetById(Long satelliteId);
 

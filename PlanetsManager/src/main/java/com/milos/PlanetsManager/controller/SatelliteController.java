@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,6 +44,14 @@ public class SatelliteController {
 			throws EntityDoesNotExistException {
 		Satellite satellite = satelliteService.fetchSatelliteById(statelliteId);
 		return new ResponseEntity<Satellite>(satellite, HttpStatus.OK);
+
+	}
+	
+	@PutMapping
+	public ResponseEntity<Satellite> updateSatellite(@Valid @RequestBody Satellite updateSatellite)
+			throws EntityDoesNotExistException {
+		Satellite updatedsatellite = satelliteService.updateSatellite(updateSatellite);
+		return new ResponseEntity<Satellite>(updatedsatellite, HttpStatus.OK);
 
 	}
 

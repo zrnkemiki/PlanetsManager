@@ -54,9 +54,12 @@ public class SatelliteServiceImpl implements SatelliteService {
 	}
 
 	@Override
-	public Satellite updateSatellite(Satellite updateSatellite) {
-		// TODO Auto-generated method stub
-		return null;
+	public Satellite updateSatellite(Satellite updateSatellite) throws EntityDoesNotExistException {
+		if (updateSatellite.getId() != null && !satelliteRepository.existsById(updateSatellite.getId())) {
+			throw new EntityDoesNotExistException(HttpStatus.BAD_REQUEST,
+					"Satellite you are trying to UPDATE does not exist!");
+		}
+		return satelliteRepository.save(updateSatellite);
 	}
 
 	@Override
