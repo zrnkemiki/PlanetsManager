@@ -2,7 +2,7 @@ package com.milos.PlanetsManager.exception;
 
 import org.springframework.http.HttpStatus;
 
-public class CustomException extends Exception {
+public class EntityDoesNotExistException extends Exception {
 	/**
 	 * 
 	 */
@@ -10,10 +10,10 @@ public class CustomException extends Exception {
 	private HttpStatus httpStatus;
 	private String message;
 
-	public CustomException() {
+	public EntityDoesNotExistException() {
 	};
 
-	public CustomException(HttpStatus httpStatus, String message) {
+	public EntityDoesNotExistException(HttpStatus httpStatus, String message) {
 		super();
 		this.httpStatus = httpStatus;
 		this.message = message;

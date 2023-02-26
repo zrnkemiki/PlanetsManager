@@ -7,5 +7,7 @@ import com.milos.PlanetsManager.model.Planet;
 
 @Repository
 public interface PlanetRepository extends JpaRepository<Planet, Long> {
+	
+	boolean existsByName(String planetName);
 
 }

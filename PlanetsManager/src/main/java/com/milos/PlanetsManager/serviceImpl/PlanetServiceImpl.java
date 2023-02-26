@@ -1,11 +1,14 @@
 package com.milos.PlanetsManager.serviceImpl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import com.milos.PlanetsManager.dto.PlanetDto;
+import com.milos.PlanetsManager.exception.EntityAlreadyExistsException;
+import com.milos.PlanetsManager.exception.EntityDoesNotExistException;
 import com.milos.PlanetsManager.model.Planet;
 import com.milos.PlanetsManager.repository.PlanetRepository;
 import com.milos.PlanetsManager.service.PlanetService;
@@ -18,31 +21,48 @@ public class PlanetServiceImpl implements PlanetService {
 
 	@Override
 	public Planet savePlanet(Planet newPlanet) {
-		// TODO Auto-generated method stub
-		return null;
+		if (planetRepository.existsByName(newPlanet.getName())) {
+			throw new EntityAlreadyExistsException(HttpStatus.BAD_REQUEST, "Planet with given name already exists!");
+		}
+		if (newPlanet.getId() != null && planetRepository.existsById(newPlanet.getId())) {
+			throw new EntityAlreadyExistsException(HttpStatus.BAD_REQUEST, "Planet with given ID already exists!");
+		}
+
+		return planetRepository.save(newPlanet);
 	}
 
 	@Override
-	public List<Planet> fetchPlanetList() {
+	public List<Planet> fetchPlanets() {
 		return planetRepository.findAll();
 	}
 
 	@Override
-	public Planet updatePlanet(PlanetDto updatePlanetDto) {
-		// TODO Auto-generated method stub
-		return null;
+	public Planet updatePlanet(Planet updatePlanet) throws EntityDoesNotExistException {
+		if (updatePlanet.getId() != null && !planetRepository.existsById(updatePlanet.getId())) {
+			throw new EntityDoesNotExistException(HttpStatus.BAD_REQUEST,
+					"Planet you are trying to UPDATE does not exist!");
+		}
+		return planetRepository.save(updatePlanet);
+
 	}
 
 	@Override
-	public Boolean deletePlanetById(Long planetId) {
-		// TODO Auto-generated method stub
-		return true;
+	public void deletePlanetById(Long planetId) throws EntityDoesNotExistException {
+		if (!planetRepository.existsById(planetId)) {
+			throw new EntityDoesNotExistException(HttpStatus.BAD_REQUEST,
+					"Planet could not be deleted, because does not exist!");
+		}
+		planetRepository.deleteById(planetId);
 	}
 
 	@Override
-	public Planet fetchPlanetById(Long planetId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Planet fetchPlanetById(Long planetId) throws EntityDoesNotExistException {
+		Optional<Planet> planet = planetRepository.findById(planetId);
+		if (planet.isEmpty()) {
+			throw new EntityDoesNotExistException(HttpStatus.BAD_REQUEST, "Planet with given ID does not exist!");
+		}
+		return planet.get();
+
 	}
 
 }

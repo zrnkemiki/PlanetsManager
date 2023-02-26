@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.milos.PlanetsManager.dto.PlanetDto;
+
 @Entity
 @Table(name = "planets")
 public class Planet {
@@ -49,6 +51,16 @@ public class Planet {
 		this.distanceFromSun = distanceFromSun;
 		this.averageSurfaceTemperature = averageSurfaceTemperature;
 		this.satellites = satellites;
+	}
+
+	public Planet(PlanetDto updatePlanetDto) {
+		this.id = updatePlanetDto.getId();
+		this.name = updatePlanetDto.getName();
+		this.surfaceArea = updatePlanetDto.getSurfaceArea();
+		this.mass = updatePlanetDto.getMass();
+		this.distanceFromSun = updatePlanetDto.getDistanceFromSun();
+		this.averageSurfaceTemperature = updatePlanetDto.getAverageSurfaceTemperature();
+		this.satellites = updatePlanetDto.getSatellites();
 	}
 
 	public Long getId() {
