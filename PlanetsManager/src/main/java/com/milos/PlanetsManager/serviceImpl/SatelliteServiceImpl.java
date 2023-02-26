@@ -1,6 +1,7 @@
 package com.milos.PlanetsManager.serviceImpl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,6 +35,17 @@ public class SatelliteServiceImpl implements SatelliteService {
 		planetService.updatePlanet(planet); // Saving the planet, the new satellite will be saved too!
 
 		return satellite;
+	}
+
+	@Override
+	public Satellite fetchSatelliteById(Long satelliteId) throws EntityDoesNotExistException {
+		Optional<Satellite> satellite = satelliteRepository.findById(satelliteId);
+		if (satellite.isEmpty()) {
+			throw new EntityDoesNotExistException(HttpStatus.BAD_REQUEST,
+					"Satellite with the given ID does not exist!");
+		}
+		return satellite.get();
+
 	}
 
 	@Override

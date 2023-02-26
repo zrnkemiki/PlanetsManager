@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,14 @@ public class SatelliteController {
 	@GetMapping
 	public ResponseEntity<List<Satellite>> fetchSatellites() {
 		return new ResponseEntity<List<Satellite>>(satelliteService.fetchSatellits(), HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<Satellite> fetchSatelliteById(@PathVariable("id") Long statelliteId)
+			throws EntityDoesNotExistException {
+		Satellite satellite = satelliteService.fetchSatelliteById(statelliteId);
+		return new ResponseEntity<Satellite>(satellite, HttpStatus.OK);
+
 	}
 
 
