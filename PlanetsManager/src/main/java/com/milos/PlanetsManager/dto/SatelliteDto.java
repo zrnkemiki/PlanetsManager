@@ -1,39 +1,27 @@
-package com.milos.PlanetsManager.model;
+package com.milos.PlanetsManager.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+public class SatelliteDto {
 
-@Entity
-@Table(name = "satellites")
-public class Satellite {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@Column(nullable = false, unique = true)
 	private String name;
-	@Column(nullable = false)
 	private Long surfaceArea;
-	@Column(nullable = false)
 	private Long mass;
-	@Column
 	private Boolean naturalSatellite;
+	private Long planetId;
 
-	public Satellite() {
+	public SatelliteDto() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public Satellite(Long id, String name, Long surfaceArea, Long mass, Boolean naturalSatellite) {
+	public SatelliteDto(Long id, String name, Long surfaceArea, Long mass, Boolean naturalSatellite, Long planetId) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.surfaceArea = surfaceArea;
 		this.mass = mass;
 		this.naturalSatellite = naturalSatellite;
+		this.planetId = planetId;
 	}
 
 	public Long getId() {
@@ -74,6 +62,14 @@ public class Satellite {
 
 	public void setNaturalSatellite(Boolean naturalSatellite) {
 		this.naturalSatellite = naturalSatellite;
+	}
+
+	public Long getPlanetId() {
+		return planetId;
+	}
+
+	public void setPlanetId(Long planetId) {
+		this.planetId = planetId;
 	}
 
 }

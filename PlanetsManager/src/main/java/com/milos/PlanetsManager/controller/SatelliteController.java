@@ -9,7 +9,7 @@ import com.milos.PlanetsManager.serviceImpl.SatelliteServiceImpl;
 @RestController
 @RequestMapping("/satellite")
 public class SatelliteController {
-	
+
 	@Autowired
 	SatelliteServiceImpl satelliteService;
 

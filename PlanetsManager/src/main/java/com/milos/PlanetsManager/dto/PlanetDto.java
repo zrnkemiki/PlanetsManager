@@ -1,45 +1,26 @@
-package com.milos.PlanetsManager.model;
+package com.milos.PlanetsManager.dto;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import com.milos.PlanetsManager.model.Satellite;
 
-@Entity
-@Table(name = "planets")
-public class Planet {
+public class PlanetDto {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@Column(nullable = false, unique = true)
 	private String name;
-	@Column(nullable = false)
 	private Long surfaceArea;
-	@Column(nullable = false)
 	private Long mass;
-	@Column(nullable = false)
 	private Long distanceFromSun;
-	@Column
 	private Integer averageSurfaceTemperature;
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "planet_id", referencedColumnName = "id")
 	private Set<Satellite> satellites = new HashSet<Satellite>();
 
-	public Planet() {
+	public PlanetDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Planet(Long id, String name, Long surfaceArea, Long mass, Long distanceFromSun,
+	public PlanetDto(Long id, String name, Long surfaceArea, Long mass, Long distanceFromSun,
 			Integer averageSurfaceTemperature, Set<Satellite> satellites) {
 		super();
 		this.id = id;
