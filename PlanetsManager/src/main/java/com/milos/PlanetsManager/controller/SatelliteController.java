@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +27,7 @@ public class SatelliteController {
 
 	@Autowired
 	SatelliteServiceImpl satelliteService;
-	
+
 	@PostMapping
 	public ResponseEntity<Satellite> createSatellite(@Valid @RequestBody SatelliteDto satelliteDto)
 			throws EntityDoesNotExistException {
@@ -38,7 +39,7 @@ public class SatelliteController {
 	public ResponseEntity<List<Satellite>> fetchSatellites() {
 		return new ResponseEntity<List<Satellite>>(satelliteService.fetchSatellits(), HttpStatus.OK);
 	}
-	
+
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Satellite> fetchSatelliteById(@PathVariable("id") Long statelliteId)
 			throws EntityDoesNotExistException {
@@ -46,7 +47,7 @@ public class SatelliteController {
 		return new ResponseEntity<Satellite>(satellite, HttpStatus.OK);
 
 	}
-	
+
 	@PutMapping
 	public ResponseEntity<Satellite> updateSatellite(@Valid @RequestBody Satellite updateSatellite)
 			throws EntityDoesNotExistException {
@@ -55,5 +56,11 @@ public class SatelliteController {
 
 	}
 
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<String> deleteSatellite(@PathVariable("id") Long satelliteId)
+			throws EntityDoesNotExistException {
+		satelliteService.deleteSatellitetById(satelliteId);
+		return new ResponseEntity<String>("Satellite deleted successfully", HttpStatus.OK);
+	}
 
 }

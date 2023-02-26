@@ -10,13 +10,11 @@ public interface SatelliteService {
 	Satellite saveSatellite(SatelliteDto satelliteDto) throws EntityDoesNotExistException;
 
 	List<Satellite> fetchSatellits();
-	
+
 	Satellite fetchSatelliteById(Long satelliteId) throws EntityDoesNotExistException;
 
 	Satellite updateSatellite(Satellite updateSatellite) throws EntityDoesNotExistException;
 
-	void deleteSatellitetById(Long satelliteId);
-
-	Satellite saveSatellite(Satellite newSatellite);
+	void deleteSatellitetById(Long satelliteId) throws EntityDoesNotExistException;
 
 }

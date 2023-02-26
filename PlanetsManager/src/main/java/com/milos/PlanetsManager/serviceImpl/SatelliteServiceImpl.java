@@ -63,15 +63,13 @@ public class SatelliteServiceImpl implements SatelliteService {
 	}
 
 	@Override
-	public void deleteSatellitetById(Long satelliteId) {
-		// TODO Auto-generated method stub
+	public void deleteSatellitetById(Long satelliteId) throws EntityDoesNotExistException {
+		if (!satelliteRepository.existsById(satelliteId)) {
+			throw new EntityDoesNotExistException(HttpStatus.BAD_REQUEST,
+					"Satellite could not be deleted, because it does not exist!");
+		}
+		satelliteRepository.deleteById(satelliteId);
 
-	}
-
-	@Override
-	public Satellite saveSatellite(Satellite newSatellite) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
