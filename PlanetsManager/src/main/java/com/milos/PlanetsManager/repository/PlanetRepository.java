@@ -6,7 +6,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.milos.PlanetsManager.model.Planet;
@@ -33,9 +32,16 @@ public interface PlanetRepository extends JpaRepository<Planet, Long> {
 			nativeQuery = true)
 	Page<Planet> findAndSortBySatellitesDESC(Pageable pageable);
 	
-
+	@Query(value = "SELECT planets.*, COUNT(satellites.id) AS num_satellites "
+			+ "FROM planets "
+			+ "LEFT JOIN satellites ON planets.id = satellites.planet_id "
+			+ "WHERE LOWER(planets.name) LIKE LOWER(concat('%', :name, '%')) "
+			+ "GROUP BY planets.id "
+			+ "ORDER BY num_satellites DESC", 
+			nativeQuery = true)
 	List<Planet> findAllByNameContainingIgnoreCase(String name, Pageable pageable);
 
+	
 	
 
 }
