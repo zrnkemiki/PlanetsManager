@@ -11,7 +11,7 @@ public interface PlanetService {
 
 	Planet savePlanet(Planet newPlanet);
 
-	List<Planet> fetchPlanets();
+	List<Planet> fetchPlanets(Integer pageNo, Integer pageSize, String planetName, boolean sortByNumOfSatelites);
 
 	Planet updatePlanet(Planet updatePlanet) throws EntityDoesNotExistException;
 
@@ -20,5 +20,6 @@ public interface PlanetService {
 	Planet fetchPlanetById(Long planetId) throws EntityDoesNotExistException;
 
 	Set<Satellite> fetchPlanetSatellites(Long planetId) throws EntityDoesNotExistException;
+
 
 }

@@ -38,6 +38,11 @@ public class SatelliteServiceImpl implements SatelliteService {
 	}
 
 	@Override
+	public List<Satellite> fetchSatellits() {
+		return satelliteRepository.findAll();
+	}
+
+	@Override
 	public Satellite fetchSatelliteById(Long satelliteId) throws EntityDoesNotExistException {
 		Optional<Satellite> satellite = satelliteRepository.findById(satelliteId);
 		if (satellite.isEmpty()) {
@@ -46,11 +51,6 @@ public class SatelliteServiceImpl implements SatelliteService {
 		}
 		return satellite.get();
 
-	}
-
-	@Override
-	public List<Satellite> fetchSatellits() {
-		return satelliteRepository.findAll();
 	}
 
 	@Override
