@@ -18,11 +18,11 @@ public class Satellite {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@NotBlank(message = "Satellite name field may not be blank!")
+	@NotBlank(message = "Satellite name field cannot be blank!")
 	private String name;
-	@NotNull(message = "Satellite surfaceArea field may not be blank!")
+	@NotNull(message = "Satellite surfaceArea field cannot be blank!")
 	private Long surfaceArea;
-	@NotNull(message = "Satellite mass field may not be blank!")
+	@NotNull(message = "Satellite mass field may cannot blank!")
 	private Long mass;
 	@Column
 	private Boolean naturalSatellite;

@@ -41,8 +41,8 @@ public class PlanetController {
 	@GetMapping
 	public ResponseEntity<List<Planet>> fetchPlanets(@RequestParam(defaultValue = "0") Integer pageNo,
 			@RequestParam(defaultValue = "10") Integer pageSize, @RequestParam(required = false) String planetName,
-			@RequestParam(required = false) boolean sortByNumOfSatelites) {
-		List<Planet> planets = planetService.fetchPlanets(pageNo, pageSize, planetName, sortByNumOfSatelites);
+			@RequestParam(defaultValue = "ASC", required = false) String sortBy) {
+		List<Planet> planets = planetService.fetchPlanets(pageNo, pageSize, planetName, sortBy);
 		return new ResponseEntity<List<Planet>>(planets, HttpStatus.OK);
 	}
 

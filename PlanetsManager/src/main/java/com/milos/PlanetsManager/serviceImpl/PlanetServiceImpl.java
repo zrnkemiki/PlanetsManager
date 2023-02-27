@@ -6,10 +6,8 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -80,26 +78,25 @@ public class PlanetServiceImpl implements PlanetService {
 	// filter by planet name and sortBy number of satellites
 	@Override
 	public List<Planet> fetchPlanets(Integer pageNo, Integer pageSize, String planetName,
-			boolean sortByNumOfSatelites) {
+			String sortBy) {
 		Pageable paging;
-		//TO-DO sortiranje
-//		if (sortByNumOfSatelites) {
-//			
-//			paging = PageRequest.of(pageNo, pageSize, Sort.by("satellites"));
-//		} else {
-//			paging = PageRequest.of(pageNo, pageSize);
-//		}
 		paging = PageRequest.of(pageNo, pageSize);
-		Page<Planet> pagedResult;
-		List<Planet> planets = new ArrayList<>();
-		if (planetName == null) {
-			pagedResult = planetRepository.findAll(paging);
-			return pagedResult.getContent();
-		} else {
-			planets = planetRepository.findAllByNameContainingIgnoreCase(planetName, paging);
+		//List<Planet> planets = new ArrayList<>();
+		if(planetName==null) {
+			if(sortBy.equalsIgnoreCase("ASC")) {
+				return planetRepository.findAndSortBySatellitesASC(paging).getContent();
+			}
+			else {
+				return planetRepository.findAndSortBySatellitesDESC(paging).getContent();
+			}
 		}
+		else {
+			return planetRepository.findAllByNameContainingIgnoreCase(planetName, paging);
+		}
+		
+		
+		
 
-		return planets;
 	}
 
 }

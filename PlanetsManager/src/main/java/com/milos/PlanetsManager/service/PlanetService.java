@@ -11,7 +11,7 @@ public interface PlanetService {
 
 	Planet savePlanet(Planet newPlanet);
 
-	List<Planet> fetchPlanets(Integer pageNo, Integer pageSize, String planetName, boolean sortByNumOfSatelites);
+	List<Planet> fetchPlanets(Integer pageNo, Integer pageSize, String planetName, String sortByNumOfSatelites);
 
 	Planet updatePlanet(Planet updatePlanet) throws EntityDoesNotExistException;
 

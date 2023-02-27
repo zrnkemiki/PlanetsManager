@@ -19,18 +19,18 @@ import com.milos.PlanetsManager.dto.PlanetDto;
 
 @Entity
 @Table(name = "planets")
-public class Planet {
+public class Planet{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@NotBlank(message = "Planet name field may not be blank!")
+	@NotBlank(message = "Planet name field can cannot be blank!")
 	private String name;
-	@NotNull(message = "Planet surfaceArea field may not be blank!")
+	@NotNull(message = "Planet surfaceArea field cannot not be blank!")
 	private Long surfaceArea;
-	@NotNull(message = "Planet mass field may not be blank!")
+	@NotNull(message = "Planet mass field may cannot blank!")
 	private Long mass;
-	@NotNull(message = "Planet distanceFromSun field may not be blank!")
+	@NotNull(message = "Planet distanceFromSun field cannot be blank!")
 	private Long distanceFromSun;
 	@Column
 	private Integer averageSurfaceTemperature;
@@ -120,5 +120,6 @@ public class Planet {
 	public void setSatellites(Set<Satellite> satellites) {
 		this.satellites = satellites;
 	}
+
 
 }
