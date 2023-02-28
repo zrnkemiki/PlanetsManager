@@ -57,6 +57,16 @@ public class PlanetControllerIntegrationTest {
 	}
 
 	@Test
+	public void testCreatePlanetWithNoName() {
+		Planet planet = new Planet(1234L, "", 111L, 111L, 111L, 111, new HashSet<>());
+		ResponseEntity<String> responseEntity = this.restTemplate.postForEntity(createURLWithPort("/planet"), planet,
+				String.class);
+		System.out.println(responseEntity.getBody());
+		assertEquals(400, responseEntity.getStatusCodeValue());
+
+	}
+
+	@Test
 	public void testFetchPlanetsByName() {
 		HttpEntity<String> entity = new HttpEntity<String>(null, headers);
 		ResponseEntity<String> responseEntity = restTemplate.exchange(createURLWithPort("/planet?planetName=earth"),
@@ -74,7 +84,7 @@ public class PlanetControllerIntegrationTest {
 				HttpMethod.GET, entity, String.class);
 		assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 	}
-	
+
 	@Test
 	public void testFetchPlanetsSortByDESC() {
 		HttpEntity<String> entity = new HttpEntity<String>(null, headers);
