@@ -33,7 +33,6 @@ public class SatelliteServiceImpl implements SatelliteService {
 		Planet planet = planetService.fetchPlanetById(satelliteDto.getPlanetId());
 		planet.getSatellites().add(satellite);
 		planetService.updatePlanet(planet); // Saving the planet, the new satellite will be saved too!
-
 		return satellite;
 	}
 

@@ -1,11 +1,10 @@
-insert into planets(id, average_surface_temperature, distance_from_sun, mass, name, surface_area) values (111,11,111,1111,'Earth Test', 123);
+insert into planets(id, average_surface_temperature, distance_from_sun, mass, name, surface_area) values (111,11,111,1111,'Earth', 123);
 
-insert into planets(id, average_surface_temperature, distance_from_sun, mass, name, surface_area) values (222,22,222,2222,'Mars Test', 234);
+insert into planets(id, average_surface_temperature, distance_from_sun, mass, name, surface_area) values (222,22,222,2222,'Mars', 234);
 
-insert into planets(id, average_surface_temperature, distance_from_sun, mass, name, surface_area) values (333,33,333,3333,'Jupiter Test', 345);
+insert into planets(id, average_surface_temperature, distance_from_sun, mass, name, surface_area) values (333,33,333,3333,'Jupiter', 345);
 
 insert into satellites(id, mass, name, natural_satellite, surface_area, planet_id) values (111, 11, 'Moon', 'true', 1111, 111);
-
 
 insert into satellites(id, mass, name, natural_satellite, surface_area, planet_id) values (222, 22, 'Phobos', 'true', 2222, 222);
 

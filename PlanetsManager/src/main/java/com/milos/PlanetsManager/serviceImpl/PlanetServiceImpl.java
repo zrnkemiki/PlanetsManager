@@ -49,7 +49,7 @@ public class PlanetServiceImpl implements PlanetService {
 	public void deletePlanetById(Long planetId) throws EntityDoesNotExistException {
 		if (!planetRepository.existsById(planetId)) {
 			throw new EntityDoesNotExistException(HttpStatus.BAD_REQUEST,
-					"Planet could not be deleted, because does not exist!");
+					"Planet could not be deleted, because it does not exist!");
 		}
 		planetRepository.deleteById(planetId);
 	}
