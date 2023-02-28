@@ -34,7 +34,7 @@ public class PlanetControllerIntegrationTest {
 
 	@Test
 	public void testCreatePlanet() {
-		Planet planet = new Planet(1234L, "Planet test", 111L, 111L, 111L, 111, new HashSet<>());
+		Planet planet = new Planet(1L, "Planet test", 111L, 111L, 111L, 111, new HashSet<>());
 		ResponseEntity<String> responseEntity = this.restTemplate.postForEntity(createURLWithPort("/planet"), planet,
 				String.class);
 		String expected = "{\"id\":1,\"name\":\"Planet test\",\"surfaceArea\":111,\"mass\":111,\"distanceFromSun\""
@@ -54,16 +54,29 @@ public class PlanetControllerIntegrationTest {
 		assertEquals(400, responseEntity.getStatusCodeValue());
 
 	}
+	
+	@Test
+	public void testFetchPlanetsByName() {
+		HttpEntity<String> entity = new HttpEntity<String>(null, headers);
+		ResponseEntity<String> responseEntity = restTemplate.exchange(createURLWithPort("/planet?planetName=earth"), HttpMethod.GET,
+				entity, String.class);
+		String expected = "[{\"id\":111,\"name\":\"Earth\",\"surfaceArea\":123,\"mass\":1111,\"distanceFromSun\":111,\""
+				+ "averageSurfaceTemperature\":11,\"satellites\":[{\"id\":111,\"name\":\"Moon\",\"surfaceArea\":1111,\""
+				+ "mass\":11,\"naturalSatellite\":true}]}]";
+		System.out.println(responseEntity.getBody());
+		assertEquals(expected, responseEntity.getBody());
+
+	}
 
 	@Test
 	public void testFetchPlanetById() {
 		HttpEntity<String> entity = new HttpEntity<String>(null, headers);
-		ResponseEntity<String> response = restTemplate.exchange(createURLWithPort("/planet/111"), HttpMethod.GET,
+		ResponseEntity<String> responseEntity = restTemplate.exchange(createURLWithPort("/planet/111"), HttpMethod.GET,
 				entity, String.class);
 		String expected = "{\"id\":111,\"name\":\"Earth\",\"surfaceArea\":123,\"mass\":1111,\"distanceFromSun\":111,\""
 				+ "averageSurfaceTemperature\":11,\"satellites\":[{\"id\":111,\"name\":\"Moon\",\"surfaceArea\":1111,\""
 				+ "mass\":11,\"naturalSatellite\":true}]}";
-		assertEquals(expected, response.getBody());
+		assertEquals(expected, responseEntity.getBody());
 	}
 
 }
