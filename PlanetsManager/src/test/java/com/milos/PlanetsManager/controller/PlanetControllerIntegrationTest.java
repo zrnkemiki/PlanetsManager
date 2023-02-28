@@ -13,6 +13,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.milos.PlanetsManager.model.Planet;
@@ -54,18 +55,24 @@ public class PlanetControllerIntegrationTest {
 		assertEquals(400, responseEntity.getStatusCodeValue());
 
 	}
-	
+
 	@Test
 	public void testFetchPlanetsByName() {
 		HttpEntity<String> entity = new HttpEntity<String>(null, headers);
-		ResponseEntity<String> responseEntity = restTemplate.exchange(createURLWithPort("/planet?planetName=earth"), HttpMethod.GET,
-				entity, String.class);
+		ResponseEntity<String> responseEntity = restTemplate.exchange(createURLWithPort("/planet?planetName=earth"),
+				HttpMethod.GET, entity, String.class);
 		String expected = "[{\"id\":111,\"name\":\"Earth\",\"surfaceArea\":123,\"mass\":1111,\"distanceFromSun\":111,\""
 				+ "averageSurfaceTemperature\":11,\"satellites\":[{\"id\":111,\"name\":\"Moon\",\"surfaceArea\":1111,\""
 				+ "mass\":11,\"naturalSatellite\":true}]}]";
-		System.out.println(responseEntity.getBody());
 		assertEquals(expected, responseEntity.getBody());
+	}
 
+	@Test
+	public void testFetchPlanetsSortByASC() {
+		HttpEntity<String> entity = new HttpEntity<String>(null, headers);
+		ResponseEntity<String> responseEntity = restTemplate.exchange(createURLWithPort("/planet?sortBy=ASC"),
+				HttpMethod.GET, entity, String.class);
+		assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 	}
 
 	@Test
