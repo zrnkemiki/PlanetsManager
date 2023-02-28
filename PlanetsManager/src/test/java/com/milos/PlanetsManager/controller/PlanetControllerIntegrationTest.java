@@ -41,7 +41,7 @@ public class PlanetControllerIntegrationTest {
 		String expected = "{\"id\":1,\"name\":\"Planet test\",\"surfaceArea\":111,\"mass\":111,\"distanceFromSun\""
 				+ ":111,\"averageSurfaceTemperature\":111,\"satellites\":[]}";
 		assertEquals(expected, responseEntity.getBody());
-		assertEquals(201, responseEntity.getStatusCodeValue());
+		assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
 
 	}
 
@@ -52,7 +52,7 @@ public class PlanetControllerIntegrationTest {
 				String.class);
 		String expected = "Planet with given name already exists!";
 		assertEquals(expected, responseEntity.getBody());
-		assertEquals(400, responseEntity.getStatusCodeValue());
+		assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
 
 	}
 
@@ -62,7 +62,7 @@ public class PlanetControllerIntegrationTest {
 		ResponseEntity<String> responseEntity = this.restTemplate.postForEntity(createURLWithPort("/planet"), planet,
 				String.class);
 		System.out.println(responseEntity.getBody());
-		assertEquals(400, responseEntity.getStatusCodeValue());
+		assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
 
 	}
 

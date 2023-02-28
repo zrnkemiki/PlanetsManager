@@ -32,7 +32,7 @@ public class SatelliteServiceTest {
 	SatelliteServiceImpl satelliteService;
 	
 	@Test
-	public void fetchSatellites() {
+	public void testFetchSatellites() {
 		Satellite moonSatellite = new Satellite(1L, "Moon", 1111L, 1111L, true);
 		Satellite phobosSatellite = new Satellite(2L, "Phobos", 2222L, 2222L, true);
 		List<Satellite> satellites = new ArrayList<>();
@@ -45,7 +45,7 @@ public class SatelliteServiceTest {
 	}
 	
 	@Test
-	public void fetchSatelliteById() throws EntityDoesNotExistException {
+	public void testFetchSatelliteById() throws EntityDoesNotExistException {
 		Satellite moonSatellite = new Satellite(1L, "Moon", 1111L, 1111L, true);		
 		when(satelliteRepository.findById(moonSatellite.getId())).thenReturn(Optional.of(moonSatellite));
 		assertEquals(moonSatellite, satelliteService.fetchSatelliteById(moonSatellite.getId()));
@@ -53,7 +53,7 @@ public class SatelliteServiceTest {
 	}
 	
 	@Test
-	public void fetchSatelliteByNonExistingId() throws EntityDoesNotExistException {		
+	public void testFetchSatelliteByNonExistingId() throws EntityDoesNotExistException {		
 		when(satelliteRepository.findById(1L)).thenReturn(Optional.empty());
 		Exception exception = assertThrows(EntityDoesNotExistException.class, () -> {
 			satelliteService.fetchSatelliteById(1L);
