@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import com.milos.PlanetsManager.exception.EntityDoesNotExistException;
 import com.milos.PlanetsManager.model.Planet;
 import com.milos.PlanetsManager.model.Satellite;
 import com.milos.PlanetsManager.repository.PlanetRepository;
@@ -36,5 +38,16 @@ public class PlanetServiceTest {
 		Planet planet = new Planet(1L, "Earth", 123L, 123L, 123L, 15, earthSatellites);
 		when(planetRepository.save(planet)).thenReturn(planet);
 		assertEquals(planet, planetService.savePlanet(planet));
+	}
+
+	@Test
+	public void testFetchPlanetById() throws EntityDoesNotExistException {
+		Satellite moonSatellite = new Satellite(1L, "Moon", 1111L, 1111L, true);
+		Set<Satellite> earthSatellites = new HashSet<>();
+		earthSatellites.add(moonSatellite);
+		Planet planet = new Planet(1L, "Earth", 123L, 123L, 123L, 15, earthSatellites);
+		when(planetRepository.findById(planet.getId())).thenReturn(Optional.of(planet));
+		assertEquals("Earth", planetService.fetchPlanetById(1L).getName());
+
 	}
 }
