@@ -33,12 +33,23 @@ public class PlanetControllerIntegrationTest {
 	@Test
 	public void testCreatePlanet() {
 		Planet planet = new Planet(1234L, "Planet test", 111L, 111L, 111L, 111, new HashSet<>());
-		ResponseEntity<String> responseEntity = this.restTemplate.postForEntity("http://localhost:" + port + "/planet",
+		ResponseEntity<String> responseEntity = this.restTemplate.postForEntity(createURLWithPort("/planet"),
 				planet, String.class);
 		String expected = "{\"id\":1,\"name\":\"Planet test\",\"surfaceArea\":111,\"mass\":111,\"distanceFromSun\""
 				+ ":111,\"averageSurfaceTemperature\":111,\"satellites\":[]}";
 		assertEquals(expected, responseEntity.getBody());
 		assertEquals(201, responseEntity.getStatusCodeValue());
+
+	}
+	
+	@Test
+	public void testCreatePlanetWithExistingName() {
+		Planet planet = new Planet(1234L, "Earth", 111L, 111L, 111L, 111, new HashSet<>());
+		ResponseEntity<String> responseEntity = this.restTemplate.postForEntity(createURLWithPort("/planet"),
+				planet, String.class);
+		String expected = "Planet with given name already exists!";
+		assertEquals(expected, responseEntity.getBody());
+		assertEquals(400, responseEntity.getStatusCodeValue());
 
 	}
 
