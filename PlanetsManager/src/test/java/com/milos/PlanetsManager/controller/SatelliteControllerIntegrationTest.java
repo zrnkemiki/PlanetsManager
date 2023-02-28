@@ -62,4 +62,12 @@ public class SatelliteControllerIntegrationTest {
 		assertEquals(400, responseEntity.getStatusCodeValue());
 	}
 
+	public void testFetchSatellites() {
+		HttpEntity<String> entity = new HttpEntity<String>(null, headers);
+		ResponseEntity<String> responseEntity = restTemplate.exchange(createURLWithPort("/satellite"), HttpMethod.GET,
+				entity, String.class);
+		assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+
+	}
+
 }
