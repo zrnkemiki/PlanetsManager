@@ -8,7 +8,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -36,6 +38,18 @@ public class SatelliteControllerIntegrationTest {
 				satellite, String.class);
 		System.out.println(responseEntity.getBody());
 		assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
+	}
+
+	@Test
+	public void testFetchSatelliteById() {
+		HttpEntity<String> entity = new HttpEntity<String>(null, headers);
+		ResponseEntity<String> responseEntity = restTemplate.exchange(createURLWithPort("/satellite/111"),
+				HttpMethod.GET, entity, String.class);
+		String expected = "{\"id\":111,\"name\":\"Moon\",\"surfaceArea\""
+				+ ":1111,\"mass\":11,\"naturalSatellite\":true}";
+		System.out.println(responseEntity.getBody());
+		assertEquals(expected, responseEntity.getBody());
+
 	}
 
 }
