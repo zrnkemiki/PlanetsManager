@@ -16,7 +16,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.milos.PlanetsManager.exception.EntityAlreadyExistsException;
 import com.milos.PlanetsManager.exception.EntityDoesNotExistException;
 import com.milos.PlanetsManager.model.Satellite;
 import com.milos.PlanetsManager.repository.SatelliteRepository;
@@ -62,5 +61,17 @@ public class SatelliteServiceTest {
 		String expectedMessage = "Satellite with the given ID does not exist!";
 		assertTrue(expectedMessage.contains(exception.getMessage()));
 		
+	}
+	
+	@Test()
+	public void testDeleteNotExistingSatellite() {
+		Long satelliteId = 12345L;
+		when(satelliteRepository.findById(satelliteId)).thenReturn(Optional.empty());
+		Exception exception = assertThrows(EntityDoesNotExistException.class, () -> {
+			satelliteService.deleteSatellitetById(satelliteId);
+		});
+		String expectedMessage = "Satellite could not be deleted, because it does not exist!";
+		assertTrue(expectedMessage.contains(exception.getMessage()));
+
 	}
 }
