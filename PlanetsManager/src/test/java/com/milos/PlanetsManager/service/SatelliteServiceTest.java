@@ -1,6 +1,8 @@
 package com.milos.PlanetsManager.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import com.milos.PlanetsManager.exception.EntityAlreadyExistsException;
 import com.milos.PlanetsManager.exception.EntityDoesNotExistException;
 import com.milos.PlanetsManager.model.Satellite;
 import com.milos.PlanetsManager.repository.SatelliteRepository;
@@ -47,6 +50,17 @@ public class SatelliteServiceTest {
 		Satellite moonSatellite = new Satellite(1L, "Moon", 1111L, 1111L, true);		
 		when(satelliteRepository.findById(moonSatellite.getId())).thenReturn(Optional.of(moonSatellite));
 		assertEquals(moonSatellite, satelliteService.fetchSatelliteById(moonSatellite.getId()));
+		
+	}
+	
+	@Test
+	public void fetchSatelliteByNonExistingId() throws EntityDoesNotExistException {		
+		when(satelliteRepository.findById(1L)).thenReturn(Optional.empty());
+		Exception exception = assertThrows(EntityDoesNotExistException.class, () -> {
+			satelliteService.fetchSatelliteById(1L);
+		});
+		String expectedMessage = "Satellite with the given ID does not exist!";
+		assertTrue(expectedMessage.contains(exception.getMessage()));
 		
 	}
 }
