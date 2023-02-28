@@ -52,4 +52,14 @@ public class SatelliteControllerIntegrationTest {
 
 	}
 
+	@Test
+	public void testFetchSatelliteByNonExistingId() {
+		HttpEntity<String> entity = new HttpEntity<String>(null, headers);
+		ResponseEntity<String> responseEntity = restTemplate.exchange(createURLWithPort("/satellite/1"), HttpMethod.GET,
+				entity, String.class);
+		String expected = "Satellite with the given ID does not exist!";
+		assertEquals(expected, responseEntity.getBody());
+		assertEquals(400, responseEntity.getStatusCodeValue());
+	}
+
 }
