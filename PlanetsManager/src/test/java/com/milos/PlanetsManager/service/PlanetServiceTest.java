@@ -1,6 +1,8 @@
 package com.milos.PlanetsManager.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 import java.util.HashSet;
@@ -48,6 +50,18 @@ public class PlanetServiceTest {
 		Planet planet = new Planet(1L, "Earth", 123L, 123L, 123L, 15, earthSatellites);
 		when(planetRepository.findById(planet.getId())).thenReturn(Optional.of(planet));
 		assertEquals("Earth", planetService.fetchPlanetById(1L).getName());
+
+	}
+
+	@Test()
+	public void testPlanetNotFound() throws EntityDoesNotExistException {
+		Long planetId = 12345L;
+		when(planetRepository.findById(planetId)).thenReturn(Optional.empty());
+		Exception exception = assertThrows(EntityDoesNotExistException.class, () -> {
+			planetService.fetchPlanetById(planetId);
+		});
+		String expectedMessage = "Planet with the given ID does not exist!";
+		assertTrue(expectedMessage.contains(exception.getMessage()));
 
 	}
 }
