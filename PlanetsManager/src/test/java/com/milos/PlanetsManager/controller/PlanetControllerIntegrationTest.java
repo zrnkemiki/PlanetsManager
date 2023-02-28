@@ -74,6 +74,14 @@ public class PlanetControllerIntegrationTest {
 				HttpMethod.GET, entity, String.class);
 		assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 	}
+	
+	@Test
+	public void testFetchPlanetsSortByDESC() {
+		HttpEntity<String> entity = new HttpEntity<String>(null, headers);
+		ResponseEntity<String> responseEntity = restTemplate.exchange(createURLWithPort("/planet?sortBy=DESC"),
+				HttpMethod.GET, entity, String.class);
+		assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+	}
 
 	@Test
 	public void testFetchPlanetsSortByAscPageSizeOne() {
