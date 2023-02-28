@@ -17,6 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import com.milos.PlanetsManager.exception.EntityAlreadyExistsException;
 import com.milos.PlanetsManager.exception.EntityDoesNotExistException;
 import com.milos.PlanetsManager.model.Planet;
 import com.milos.PlanetsManager.model.Satellite;
@@ -40,6 +41,20 @@ public class PlanetServiceTest {
 		Planet planet = new Planet(1L, "Earth", 123L, 123L, 123L, 15, earthSatellites);
 		when(planetRepository.save(planet)).thenReturn(planet);
 		assertEquals(planet, planetService.savePlanet(planet));
+	}
+
+	@Test
+	public void testCreatePlanetWithExistingName() {
+		Satellite moonSatellite = new Satellite(1L, "Moon", 1111L, 1111L, true);
+		Set<Satellite> earthSatellites = new HashSet<>();
+		earthSatellites.add(moonSatellite);
+		Planet planet = new Planet(1L, "Earth", 123L, 123L, 123L, 15, earthSatellites);
+		when(planetRepository.existsByName(planet.getName())).thenReturn(true);
+		Exception exception = assertThrows(EntityAlreadyExistsException.class, () -> {
+			planetService.savePlanet(planet);
+		});
+		String expectedMessage = "Planet with given name already exists!";
+		assertTrue(expectedMessage.contains(exception.getMessage()));
 	}
 
 	@Test
