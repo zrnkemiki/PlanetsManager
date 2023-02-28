@@ -49,7 +49,7 @@ public class SatelliteServiceImpl implements SatelliteService {
 			throw new EntityDoesNotExistException(HttpStatus.BAD_REQUEST,
 					"Satellite with the given ID does not exist!");
 		}
-		return satellite.get();
+		return satellite.get(); 
 
 	}
 
