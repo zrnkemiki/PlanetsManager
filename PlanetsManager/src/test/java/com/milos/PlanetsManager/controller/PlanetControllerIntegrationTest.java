@@ -76,6 +76,17 @@ public class PlanetControllerIntegrationTest {
 	}
 
 	@Test
+	public void testFetchPlanetsSortByAscPageSizeOne() {
+		HttpEntity<String> entity = new HttpEntity<String>(null, headers);
+		ResponseEntity<String> responseEntity = restTemplate.exchange(
+				createURLWithPort("/planet?pageSize=1&pageNo=0&sortBy=ASC"), HttpMethod.GET, entity, String.class);
+		String expected = "[{\"id\":1,\"name\":\"Planet test\",\"surfaceArea\":111,\""
+				+ "mass\":111,\"distanceFromSun\":111,\"averageSurfaceTemperature\"" + ":111,\"satellites\":[]}]";
+		System.out.println(responseEntity.getBody());
+		assertEquals(expected, responseEntity.getBody());
+	}
+
+	@Test
 	public void testFetchPlanetById() {
 		HttpEntity<String> entity = new HttpEntity<String>(null, headers);
 		ResponseEntity<String> responseEntity = restTemplate.exchange(createURLWithPort("/planet/111"), HttpMethod.GET,
