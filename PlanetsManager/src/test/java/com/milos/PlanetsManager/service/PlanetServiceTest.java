@@ -87,7 +87,8 @@ public class PlanetServiceTest {
 		Exception exception = assertThrows(EntityDoesNotExistException.class, () -> {
 			planetService.deletePlanetById(planetId);
 		});
-		String expectedMessage = "Planet could not be deleted, because does not exist!";
+		System.out.println(exception.getMessage());
+		String expectedMessage = "Planet could not be deleted, because it does not exist!";
 		assertTrue(expectedMessage.contains(exception.getMessage()));
 
 	}
