@@ -17,7 +17,7 @@ When starting the app, if there is **problem with database driver**, please manu
 then right click on project -> maven -> update project and after that paste dependency back to pom.xml and update project again.
 
 This is strange issue and I tried to solve with different options but it is sometimes still present.
-If you just update project it help, needs to be deleted and then pasted back.
+If you just update project it won't help, needs to be deleted, updated and then pasted back and updated again.
 
 		<dependency>
 			<groupId>org.postgresql</groupId>
