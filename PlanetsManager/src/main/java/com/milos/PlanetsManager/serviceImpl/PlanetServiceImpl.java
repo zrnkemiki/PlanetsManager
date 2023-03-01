@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.milos.PlanetsManager.exception.EntityAlreadyExistsException;
+import com.milos.PlanetsManager.exception.EntityCouldNotBeDeletedException;
 import com.milos.PlanetsManager.exception.EntityDoesNotExistException;
 import com.milos.PlanetsManager.model.Planet;
 import com.milos.PlanetsManager.model.Satellite;
@@ -46,12 +47,20 @@ public class PlanetServiceImpl implements PlanetService {
 	}
 
 	@Override
-	public void deletePlanetById(Long planetId) throws EntityDoesNotExistException {
-		if (!planetRepository.existsById(planetId)) {
+	public void deletePlanetById(Long planetId) throws EntityDoesNotExistException, EntityCouldNotBeDeletedException {
+		Optional<Planet> planet = planetRepository.findById(planetId);
+		if (planet.isEmpty())
 			throw new EntityDoesNotExistException(HttpStatus.BAD_REQUEST,
 					"Planet could not be deleted, because it does not exist!");
+		else if (planet.get().getSatellites().size() != 0) {
+			throw new EntityCouldNotBeDeletedException(HttpStatus.BAD_REQUEST,
+					"Planet could not be deleted since it has active satellites.\n"
+					+ "Delete them first!");
 		}
-		planetRepository.deleteById(planetId);
+		else {
+			planetRepository.deleteById(planetId);
+		}
+
 	}
 
 	@Override
@@ -76,25 +85,19 @@ public class PlanetServiceImpl implements PlanetService {
 
 	// filter by planet name and sortBy number of satellites
 	@Override
-	public List<Planet> fetchPlanets(Integer pageNo, Integer pageSize, String planetName,
-			String sortBy) {
+	public List<Planet> fetchPlanets(Integer pageNo, Integer pageSize, String planetName, String sortBy) {
 		Pageable paging;
 		paging = PageRequest.of(pageNo, pageSize);
-		//List<Planet> planets = new ArrayList<>();
-		if(planetName==null) {
-			if(sortBy.equalsIgnoreCase("ASC")) {
+		// List<Planet> planets = new ArrayList<>();
+		if (planetName == null) {
+			if (sortBy.equalsIgnoreCase("ASC")) {
 				return planetRepository.findAndSortBySatellitesASC(paging).getContent();
-			}
-			else {
+			} else {
 				return planetRepository.findAndSortBySatellitesDESC(paging).getContent();
 			}
-		}
-		else {
+		} else {
 			return planetRepository.findAllByNameContainingIgnoreCase(planetName, paging);
 		}
-		
-		
-		
 
 	}
 

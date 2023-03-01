@@ -14,34 +14,21 @@ import com.milos.PlanetsManager.model.Planet;
 public interface PlanetRepository extends JpaRepository<Planet, Long> {
 
 	boolean existsByName(String planetName);
-	
-	
-	@Query(value = "SELECT planets.*, COUNT(satellites.id) AS num_satellites "
-			+ "FROM planets "
-			+ "LEFT JOIN satellites ON planets.id = satellites.planet_id "
-			+ "GROUP BY planets.id "
-			+ "ORDER BY num_satellites ASC", 
-			nativeQuery = true)
-	Page<Planet> findAndSortBySatellitesASC(Pageable pageable);
-	
-	@Query(value = "SELECT planets.*, COUNT(satellites.id) AS num_satellites "
-			+ "FROM planets "
-			+ "LEFT JOIN satellites ON planets.id = satellites.planet_id "
-			+ "GROUP BY planets.id "
-			+ "ORDER BY num_satellites DESC", 
-			nativeQuery = true)
-	Page<Planet> findAndSortBySatellitesDESC(Pageable pageable);
-	
-	@Query(value = "SELECT planets.*, COUNT(satellites.id) AS num_satellites "
-			+ "FROM planets "
-			+ "LEFT JOIN satellites ON planets.id = satellites.planet_id "
-			+ "WHERE LOWER(planets.name) LIKE LOWER(concat('%', :name, '%')) "
-			+ "GROUP BY planets.id "
-			+ "ORDER BY num_satellites DESC", 
-			nativeQuery = true)
-	List<Planet> findAllByNameContainingIgnoreCase(String name, Pageable pageable);
 
-	
-	
+	@Query(value = "SELECT planets.*, COUNT(satellites.id) AS num_satellites " + "FROM planets "
+			+ "LEFT JOIN satellites ON planets.id = satellites.planet_id " + "GROUP BY planets.id "
+			+ "ORDER BY num_satellites ASC", nativeQuery = true)
+	Page<Planet> findAndSortBySatellitesASC(Pageable pageable);
+
+	@Query(value = "SELECT planets.*, COUNT(satellites.id) AS num_satellites " + "FROM planets "
+			+ "LEFT JOIN satellites ON planets.id = satellites.planet_id " + "GROUP BY planets.id "
+			+ "ORDER BY num_satellites DESC", nativeQuery = true)
+	Page<Planet> findAndSortBySatellitesDESC(Pageable pageable);
+
+	@Query(value = "SELECT planets.*, COUNT(satellites.id) AS num_satellites " + "FROM planets "
+			+ "LEFT JOIN satellites ON planets.id = satellites.planet_id "
+			+ "WHERE LOWER(planets.name) LIKE LOWER(concat('%', :name, '%')) " + "GROUP BY planets.id "
+			+ "ORDER BY num_satellites DESC", nativeQuery = true)
+	List<Planet> findAllByNameContainingIgnoreCase(String name, Pageable pageable);
 
 }

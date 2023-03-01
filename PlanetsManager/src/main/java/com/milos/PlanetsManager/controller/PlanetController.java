@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.milos.PlanetsManager.exception.EntityAlreadyExistsException;
+import com.milos.PlanetsManager.exception.EntityCouldNotBeDeletedException;
 import com.milos.PlanetsManager.exception.EntityDoesNotExistException;
 import com.milos.PlanetsManager.model.Planet;
 import com.milos.PlanetsManager.model.Satellite;
@@ -70,7 +71,8 @@ public class PlanetController {
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Object> deletePlanet(@PathVariable("id") Long planetId) throws EntityDoesNotExistException {
+	public ResponseEntity<Object> deletePlanet(@PathVariable("id") Long planetId)
+			throws EntityDoesNotExistException, EntityCouldNotBeDeletedException {
 		planetService.deletePlanetById(planetId);
 		return new ResponseEntity<>("Planet deleted successfully", HttpStatus.OK);
 	}
@@ -87,6 +89,13 @@ public class PlanetController {
 			EntityDoesNotExistException entityDoesNotExistException) {
 		return new ResponseEntity<String>(entityDoesNotExistException.getMessage(),
 				entityDoesNotExistException.getHttpStatus());
+	}
+
+	@ExceptionHandler(value = EntityCouldNotBeDeletedException.class)
+	public ResponseEntity<String> handleEntityCouldNotBeDeletedException(
+			EntityCouldNotBeDeletedException entityCouldNotBeDeletedException) {
+		return new ResponseEntity<String>(entityCouldNotBeDeletedException.getMessage(),
+				entityCouldNotBeDeletedException.getHttpStatus());
 	}
 
 }
