@@ -11,7 +11,7 @@ There is also import.sql file which is used for inital database importing and al
 
 For testing purposes H2 database is used and the properties are set under src/test/resources/application.properties;
 
-**IMPORTANT!!!
+##**IMPORTANT!!!**##
 
 When starting the app, if there is **problem with database driver**, please manually delete or cut the postgresql dependency in pom.xml,
 then right click on project -> maven -> update project and after that paste dependency back to pom.xml and update project again.
