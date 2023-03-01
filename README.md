@@ -1,8 +1,12 @@
 # PlanetsManager
 
 Application uses PostgreSQL DBMS.
+
 To start the application create datebase called: "planetsManagerDB";
-If needed change the port on which db is running; Default set to localhost:5432
+
+If needed change the port on which db is running; 
+Default set to localhost:5432;
+Default password 1234;
 
 IMPORTANT!!!
 
