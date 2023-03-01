@@ -1,0 +1,728 @@
+{
+	"info": {
+		"_postman_id": "daf310ed-926d-49fe-883e-6954b699eca5",
+		"name": "PlanetsManager",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7871837"
+	},
+	"item": [
+		{
+			"name": "Planets",
+			"item": [
+				{
+					"name": "Create New Planet with Satellites",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Saturn\",\r\n    \"surfaceArea\": 144000000,\r\n    \"mass\": 639000000000,\r\n    \"distanceFromSun\": 244000000,\r\n    \"averageSurfaceTemperature\": -60,\r\n    \"satellites\": [\r\n        \r\n        {\r\n            \"name\": \"Mimas\",\r\n            \"surfaceArea\": 1548,\r\n            \"mass\": 1060000000000,\r\n            \"naturalSatellite\": \"true\"\r\n        },\r\n        {\r\n            \"name\": \"Dione\",\r\n            \"surfaceArea\": 1237,\r\n            \"mass\": 7450000,\r\n            \"naturalSatellite\": \"true\"\r\n        },\r\n        {\r\n            \"name\": \"Rhea\",\r\n            \"surfaceArea\": 985,\r\n            \"mass\": 106000,\r\n            \"naturalSatellite\": \"true\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/planet",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"planet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Planet without Satellites",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Uranus\",\r\n    \"surfaceArea\": 5100,\r\n    \"mass\": 297.6,\r\n    \"distanceFromSun\": 15000,\r\n    \"averageSurfaceTemperature\": 5,\r\n    \"satellites\":[]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/planet",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"planet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch planet by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/planet/333",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"planet",
+								"333"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch all planets - default paging",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/planet",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"planet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch planets - Filter by planet fullName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/planet?pageSize=3&pageNo=0&planetName=jupiter",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"planet"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "3"
+								},
+								{
+									"key": "pageNo",
+									"value": "0"
+								},
+								{
+									"key": "sortBy",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "planetName",
+									"value": "jupiter"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch all planets - PageSize=2, pageNo=0",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/planet?pageSize=2&pageNo=0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"planet"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "2"
+								},
+								{
+									"key": "pageNo",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch planets - pSize=3, pNo=0 Sort DESC",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/planet?pageSize=3&pageNo=0&sortBy=DESC",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"planet"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "3"
+								},
+								{
+									"key": "pageNo",
+									"value": "0"
+								},
+								{
+									"key": "sortBy",
+									"value": "DESC"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch planets - pSize=3, pNo=0 Sort ASC",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/planet?pageSize=3&pageNo=0&sortBy=ASC",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"planet"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "3"
+								},
+								{
+									"key": "pageNo",
+									"value": "0"
+								},
+								{
+									"key": "sortBy",
+									"value": "ASC"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch planets - Filter by planet partialName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/planet?pageSize=3&pageNo=0&planetName=e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"planet"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "3"
+								},
+								{
+									"key": "pageNo",
+									"value": "0"
+								},
+								{
+									"key": "planetName",
+									"value": "e"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch planets - Filter by partialName & ASC",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/planet?pageSize=3&pageNo=0&planetName=e&sortBy=ASC",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"planet"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "3"
+								},
+								{
+									"key": "pageNo",
+									"value": "0"
+								},
+								{
+									"key": "planetName",
+									"value": "e"
+								},
+								{
+									"key": "sortBy",
+									"value": "ASC"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch planets - Filter by partialName & DESC",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/planet?pageSize=3&pageNo=0&planetName=e&sortBy=DESC",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"planet"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "3"
+								},
+								{
+									"key": "pageNo",
+									"value": "0"
+								},
+								{
+									"key": "planetName",
+									"value": "e"
+								},
+								{
+									"key": "sortBy",
+									"value": "DESC"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update planet",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 111,\r\n    \"name\": \"Earth UPDATE\",\r\n    \"surfaceArea\": 510000000,\r\n    \"mass\": 597.6,\r\n    \"distanceFromSun\": 150000000,\r\n    \"averageSurfaceTemperature\": 15,\r\n    \"satellites\": [\r\n        {\r\n            \"id\": 111,\r\n            \"name\": \"Moon\",\r\n            \"surfaceArea\": 1111,\r\n            \"mass\": 11,\r\n            \"naturalSatellite\": true\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/planet",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"planet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch updated planet by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/planet/111",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"planet",
+								"111"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete planet by ID - non existing",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/planet/12345",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"planet",
+								"12345"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete planet by ID - containing satellites",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/planet/111",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"planet",
+								"111"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete satellite by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/satellite/111",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"satellite",
+								"111"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete planet by ID Success",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/planet/111",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"planet",
+								"111"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch deleted planet by ID - failed",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/planet/111",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"planet",
+								"111"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Satellites",
+			"item": [
+				{
+					"name": "Create satellite for the Jupiter",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Elara\",\r\n    \"surfaceArea\": 999,\r\n    \"mass\": 999,\r\n    \"naturalSatellite\": \"true\",\r\n    \"planetId\": 333\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/satellite",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"satellite"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete satellite by ID - fail",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/satellite/12345",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"satellite",
+								"12345"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch satellite by non existing ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/satellite/12345",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"satellite",
+								"12345"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch satellite by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/satellite/333",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"satellite",
+								"333"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch all satellites",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/satellite",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"satellite"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update satellite",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 333,\r\n    \"name\": \"Deimos UPDATE\",\r\n    \"surfaceArea\": 495,\r\n    \"mass\": 1800000000000000,\r\n    \"naturalSatellite\": \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/satellite",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"satellite"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch updated satellite by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/satellite/333",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"satellite",
+								"333"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update satellite with existing name - fail",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 333,\r\n    \"name\": \"Deimos UPDATE\",\r\n    \"surfaceArea\": 495,\r\n    \"mass\": 1800000000000000,\r\n    \"naturalSatellite\": \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/satellite",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"satellite"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch satellites by planet",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/planet/333/satellites",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"planet",
+								"333",
+								"satellites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch satellites by not-existing planet",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/planet/12345/satellites",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"planet",
+								"12345",
+								"satellites"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
