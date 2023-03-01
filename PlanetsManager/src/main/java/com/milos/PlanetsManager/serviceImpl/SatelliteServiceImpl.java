@@ -61,6 +61,10 @@ public class SatelliteServiceImpl implements SatelliteService {
 			throw new EntityDoesNotExistException(HttpStatus.BAD_REQUEST,
 					"Satellite you are trying to UPDATE does not exist!");
 		}
+
+		if (satelliteRepository.existsByName(updateSatellite.getName())) {
+			throw new EntityAlreadyExistsException(HttpStatus.BAD_REQUEST, "Satellite with given name already exists!");
+		}
 		return satelliteRepository.save(updateSatellite);
 	}
 
