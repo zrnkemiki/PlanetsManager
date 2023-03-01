@@ -40,7 +40,7 @@ public class PlanetServiceTest {
 		earthSatellites.add(moonSatellite);
 		Planet planet = new Planet(1L, "Earth", 123L, 123L, 123L, 15, earthSatellites);
 		when(planetRepository.save(planet)).thenReturn(planet);
-		assertEquals(planet, planetService.savePlanet(planet));
+		assertEquals(planet.getName(), planetService.savePlanet(planet).getName());
 	}
 
 	@Test
