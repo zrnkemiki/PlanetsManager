@@ -1,23 +1,28 @@
 # PlanetsManager
 
-Application uses PostgreSQL DBMS.
-
 To start the application create datebase called: "planetsManagerDB";
 
-If needed change the port on which db is running; 
-Default set to localhost:5432;
-Default password 1234;
+If needed change the port on which db is running;   
+Default port set to localhost:5432;  
+Default username: postgres;  
+Default password: 1234;  
 
-IMPORTANT!!!
+There is also import.sql file which is used for inital database importing and also for test purposes;  
 
-When starting the app, if there is problem with db driver, please manually delete the postgresql dependency in pom.xml,
+For testing purposes H2 database is used and the properties are set under src/test/resources/application.properties;
+
+##**IMPORTANT!!!**##
+
+When starting the app, if there is **problem with database driver**, please manually delete or cut the postgresql dependency in pom.xml,
 then right click on project -> maven -> update project and after that paste dependency back to pom.xml and update project again.
 
-Some strange issue I tried to solve with different options but it is sometimes present.
-If you just update project it won't go away, needs to be deleted and then pasted back.
+This is strange issue and I tried to solve with different options but it is sometimes still present.
+If you just update project it won't help, needs to be deleted, updated and then pasted back and updated again.
 
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
+There is Postman (JSON) collection for REST API testing;
