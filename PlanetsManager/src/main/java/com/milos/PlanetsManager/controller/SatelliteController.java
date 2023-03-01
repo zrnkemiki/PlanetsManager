@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.milos.PlanetsManager.dto.SatelliteDto;
-import com.milos.PlanetsManager.exception.EntityAlreadyExistsException;
 import com.milos.PlanetsManager.exception.EntityDoesNotExistException;
 import com.milos.PlanetsManager.model.Satellite;
 import com.milos.PlanetsManager.serviceImpl.SatelliteServiceImpl;
@@ -63,20 +61,6 @@ public class SatelliteController {
 			throws EntityDoesNotExistException {
 		satelliteService.deleteSatellitetById(satelliteId);
 		return new ResponseEntity<String>("Satellite deleted successfully", HttpStatus.OK);
-	}
-	
-	@ExceptionHandler(value = EntityAlreadyExistsException.class)
-	public ResponseEntity<String> handleEntityAlreadyExistsException(
-			EntityAlreadyExistsException entityAlreadyExistsException) {
-		return new ResponseEntity<String>(entityAlreadyExistsException.getMessage(),
-				entityAlreadyExistsException.getHttpStatus());
-	}
-
-	@ExceptionHandler(value = EntityDoesNotExistException.class)
-	public ResponseEntity<String> handleDoesNotExistsException(
-			EntityDoesNotExistException entityDoesNotExistException) {
-		return new ResponseEntity<String>(entityDoesNotExistException.getMessage(),
-				entityDoesNotExistException.getHttpStatus());
 	}
 
 }

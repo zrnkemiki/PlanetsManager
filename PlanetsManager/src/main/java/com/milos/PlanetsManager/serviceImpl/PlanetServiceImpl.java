@@ -52,9 +52,9 @@ public class PlanetServiceImpl implements PlanetService {
 		if (planet.isEmpty())
 			throw new EntityDoesNotExistException(HttpStatus.BAD_REQUEST,
 					"Planet could not be deleted, because it does not exist!");
-		else if (planet.get().getSatellites().size() != 0) {
+		else if (planet.get().getSatellites().size() > 0) {
 			throw new EntityCouldNotBeDeletedException(HttpStatus.BAD_REQUEST,
-					"Planet could not be deleted since it has active satellites.\n" + "Delete them first!");
+					"Planet could not be deleted since it has active satellites.\nDelete them first!");
 		} else {
 			planetRepository.deleteById(planetId);
 		}
@@ -82,7 +82,6 @@ public class PlanetServiceImpl implements PlanetService {
 	}
 
 	// filter by planet name and sortBy number of satellites
-
 	@Override
 	public List<Planet> fetchPlanets(Integer pageNo, Integer pageSize, String planetName, String sortBy) {
 		Pageable paging;
