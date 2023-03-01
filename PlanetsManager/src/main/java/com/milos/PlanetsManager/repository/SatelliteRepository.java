@@ -8,4 +8,6 @@ import com.milos.PlanetsManager.model.Satellite;
 @Repository
 public interface SatelliteRepository extends JpaRepository<Satellite, Long> {
 
+	boolean existsByName(String name);
+
 }

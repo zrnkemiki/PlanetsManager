@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 import com.milos.PlanetsManager.dto.SatelliteDto;
 
@@ -20,9 +19,9 @@ public class Satellite {
 	private Long id;
 	@NotBlank(message = "Satellite name field cannot be blank!")
 	private String name;
-	@NotNull(message = "Satellite surfaceArea field cannot be blank!")
+	@NotBlank(message = "Satellite surfaceArea field cannot be blank!")
 	private Long surfaceArea;
-	@NotNull(message = "Satellite mass field may cannot blank!")
+	@NotBlank(message = "Satellite mass field may cannot blank!")
 	private Long mass;
 	@Column
 	private Boolean naturalSatellite;

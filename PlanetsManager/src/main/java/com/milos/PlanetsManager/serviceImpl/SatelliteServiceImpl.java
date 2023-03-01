@@ -26,6 +26,9 @@ public class SatelliteServiceImpl implements SatelliteService {
 
 	@Override
 	public Satellite saveSatellite(SatelliteDto satelliteDto) throws EntityDoesNotExistException {
+		if (satelliteRepository.existsByName(satelliteDto.getName())) {
+			throw new EntityAlreadyExistsException(HttpStatus.BAD_REQUEST, "Satellite with given name already exists!");
+		}
 		Satellite satellite = new Satellite(satelliteDto);
 		if (satelliteDto.getId() != null && satelliteRepository.existsById(satelliteDto.getId())) {
 			throw new EntityAlreadyExistsException(HttpStatus.BAD_REQUEST, "Satellite with given ID already exists!");
