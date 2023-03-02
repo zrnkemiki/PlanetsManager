@@ -69,7 +69,7 @@ public class PlanetServiceTest {
 	}
 
 	@Test()
-	public void testPlanetNotFound() throws EntityDoesNotExistException {
+	public void testPlanetFetchByNonExistingId() throws EntityDoesNotExistException {
 		Long planetId = 12345L;
 		when(planetRepository.findById(planetId)).thenReturn(Optional.empty());
 		Exception exception = assertThrows(EntityDoesNotExistException.class, () -> {
