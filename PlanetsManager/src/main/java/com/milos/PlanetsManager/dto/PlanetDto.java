@@ -5,12 +5,19 @@ import java.util.Set;
 
 import com.milos.PlanetsManager.model.Satellite;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class PlanetDto {
 
 	private Long id;
+	@NotBlank(message = "Planet name field can cannot be blank!")
 	private String name;
+	@NotNull(message = "Planet surfaceArea field cannot not be blank!")
 	private Long surfaceArea;
+	@NotNull(message = "Planet mass field may cannot blank!")
 	private Long mass;
+	@NotNull(message = "Planet distanceFromSun field cannot be blank!")
 	private Long distanceFromSun;
 	private Integer averageSurfaceTemperature;
 	private Set<Satellite> satellites = new HashSet<Satellite>();

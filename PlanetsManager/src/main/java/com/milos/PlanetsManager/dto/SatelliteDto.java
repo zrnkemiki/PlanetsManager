@@ -6,12 +6,13 @@ import javax.validation.constraints.NotNull;
 public class SatelliteDto {
 
 	private Long id;
-	@NotBlank(message = "Satellite name field may not be blank!")
+	@NotBlank(message = "Satellite name field can not be blank!")
 	private String name;
-	@NotNull(message = "Satellite surfaceArea field may not be blank!")
+	@NotNull(message = "Satellite surfaceArea field can not be blank!")
 	private Long surfaceArea;
-	@NotNull(message = "Satellite mass field may not be blank!")
+	@NotNull(message = "Satellite mass field can not be blank!")
 	private Long mass;
+	@NotNull(message = "Satellite naturalSatellite field can not be blank!")
 	private Boolean naturalSatellite;
 	private Long planetId;
 

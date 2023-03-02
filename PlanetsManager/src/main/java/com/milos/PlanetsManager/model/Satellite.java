@@ -22,9 +22,9 @@ public class Satellite {
 	private String name;
 	@NotNull(message = "Satellite surfaceArea field cannot be blank!")
 	private Long surfaceArea;
-	@NotNull(message = "Satellite mass field may cannot blank!")
+	@NotNull(message = "Satellite mass field cannot blank!")
 	private Long mass;
-	@Column
+	@NotNull(message = "Satellite field naturalSatellite cannot blank!")
 	private Boolean naturalSatellite;
 
 	public Satellite() {

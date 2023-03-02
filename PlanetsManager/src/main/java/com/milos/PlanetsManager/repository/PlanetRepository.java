@@ -29,12 +29,6 @@ public interface PlanetRepository extends JpaRepository<Planet, Long> {
 			+ "LEFT JOIN satellites ON planets.id = satellites.planet_id "
 			+ "WHERE LOWER(planets.name) LIKE LOWER(concat('%', :name, '%')) " + "GROUP BY planets.id "
 			+ "ORDER BY num_satellites DESC", nativeQuery = true)
-	List<Planet> findAllByNameContainingIgnoreCase(String name, Pageable pageable);
-
-	@Query(value = "SELECT planets.*, COUNT(satellites.id) AS num_satellites " + "FROM planets "
-			+ "LEFT JOIN satellites ON planets.id = satellites.planet_id "
-			+ "WHERE LOWER(planets.name) LIKE LOWER(concat('%', :name, '%')) " + "GROUP BY planets.id "
-			+ "ORDER BY num_satellites DESC", nativeQuery = true)
 	List<Planet> findAllByNameContainingIgnoreCaseDESC(String name, Pageable pageable);
 
 	@Query(value = "SELECT planets.*, COUNT(satellites.id) AS num_satellites " + "FROM planets "
