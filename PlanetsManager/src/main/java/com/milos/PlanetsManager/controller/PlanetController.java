@@ -33,7 +33,7 @@ public class PlanetController {
 
 	@PostMapping
 	public ResponseEntity<Planet> createPlanet(@Valid @RequestBody Planet newPlanet) {
-		Planet planet = planetService.savePlanet(newPlanet);
+		Planet planet = planetService.createPlanet(newPlanet);
 		return new ResponseEntity<Planet>(planet, HttpStatus.CREATED);
 	}
 

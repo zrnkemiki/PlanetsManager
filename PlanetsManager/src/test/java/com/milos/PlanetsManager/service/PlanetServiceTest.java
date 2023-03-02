@@ -40,7 +40,7 @@ public class PlanetServiceTest {
 		earthSatellites.add(moonSatellite);
 		Planet planet = new Planet(1L, "Earth", 123L, 123L, 123L, 15, earthSatellites);
 		when(planetRepository.save(planet)).thenReturn(planet);
-		assertEquals(planet.getName(), planetService.savePlanet(planet).getName());
+		assertEquals(planet.getName(), planetService.createPlanet(planet).getName());
 	}
 
 	@Test
@@ -51,7 +51,7 @@ public class PlanetServiceTest {
 		Planet planet = new Planet(1L, "Earth", 123L, 123L, 123L, 15, earthSatellites);
 		when(planetRepository.existsByName(planet.getName())).thenReturn(true);
 		Exception exception = assertThrows(EntityAlreadyExistsException.class, () -> {
-			planetService.savePlanet(planet);
+			planetService.createPlanet(planet);
 		});
 		String expectedMessage = "Planet with given name already exists!";
 		assertTrue(expectedMessage.contains(exception.getMessage()));

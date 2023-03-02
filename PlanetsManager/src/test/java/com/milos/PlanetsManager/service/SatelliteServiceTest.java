@@ -51,7 +51,7 @@ public class SatelliteServiceTest {
 		SatelliteDto moonSatelliteDto = new SatelliteDto(1L, "Phobos", 1L, 1L, true, null);
 		when(satelliteRepository.existsByName(moonSatelliteDto.getName())).thenReturn(true);
 		Exception exception = assertThrows(EntityAlreadyExistsException.class, () -> {
-			satelliteService.saveSatellite(moonSatelliteDto);
+			satelliteService.createSatellite(moonSatelliteDto);
 		});
 		String expectedMessage = "Satellite with given name already exists!";
 		assertTrue(expectedMessage.contains(exception.getMessage()));

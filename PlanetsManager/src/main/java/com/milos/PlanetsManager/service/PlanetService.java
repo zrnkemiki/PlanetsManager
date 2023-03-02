@@ -10,7 +10,7 @@ import com.milos.PlanetsManager.model.Satellite;
 
 public interface PlanetService {
 
-	Planet savePlanet(Planet newPlanet);
+	Planet createPlanet(Planet newPlanet);
 
 	List<Planet> fetchPlanets(Integer pageNo, Integer pageSize, String planetName, String sortByNumOfSatelites);
 

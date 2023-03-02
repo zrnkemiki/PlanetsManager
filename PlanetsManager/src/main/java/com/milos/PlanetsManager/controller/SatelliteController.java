@@ -31,7 +31,7 @@ public class SatelliteController {
 	@PostMapping
 	public ResponseEntity<Satellite> createSatellite(@Valid @RequestBody SatelliteDto satelliteDto)
 			throws EntityDoesNotExistException {
-		Satellite satellite = satelliteService.saveSatellite(satelliteDto);
+		Satellite satellite = satelliteService.createSatellite(satelliteDto);
 		return new ResponseEntity<Satellite>(satellite, HttpStatus.CREATED);
 	}
 

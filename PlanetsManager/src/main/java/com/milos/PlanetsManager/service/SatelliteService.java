@@ -7,7 +7,7 @@ import com.milos.PlanetsManager.exception.EntityDoesNotExistException;
 import com.milos.PlanetsManager.model.Satellite;
 
 public interface SatelliteService {
-	Satellite saveSatellite(SatelliteDto satelliteDto) throws EntityDoesNotExistException;
+	Satellite createSatellite(SatelliteDto satelliteDto) throws EntityDoesNotExistException;
 
 	List<Satellite> fetchSatellits();
 

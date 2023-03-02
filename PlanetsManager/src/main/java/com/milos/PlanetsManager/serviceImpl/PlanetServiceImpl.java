@@ -25,7 +25,7 @@ public class PlanetServiceImpl implements PlanetService {
 	PlanetRepository planetRepository;
 
 	@Override
-	public Planet savePlanet(Planet newPlanet) {
+	public Planet createPlanet(Planet newPlanet) {
 		if (planetRepository.existsByName(newPlanet.getName())) {
 			throw new EntityAlreadyExistsException(HttpStatus.BAD_REQUEST, "Planet with given name already exists!");
 		}
