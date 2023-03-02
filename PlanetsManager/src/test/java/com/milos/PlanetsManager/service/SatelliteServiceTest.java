@@ -54,7 +54,6 @@ public class SatelliteServiceTest {
 			satelliteService.saveSatellite(moonSatelliteDto);
 		});
 		String expectedMessage = "Satellite with given name already exists!";
-		System.out.println(exception.getMessage());
 		assertTrue(expectedMessage.contains(exception.getMessage()));
 	}
 	

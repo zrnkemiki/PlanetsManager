@@ -36,7 +36,6 @@ public class SatelliteControllerIntegrationTest {
 		Satellite satellite = new Satellite(1L, "", 1111L, 1111L, true);
 		ResponseEntity<String> responseEntity = this.restTemplate.postForEntity(createURLWithPort("/satellite"),
 				satellite, String.class);
-		System.out.println(responseEntity.getBody());
 		assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
 	}
 
@@ -47,7 +46,6 @@ public class SatelliteControllerIntegrationTest {
 				HttpMethod.GET, entity, String.class);
 		String expected = "{\"id\":111,\"name\":\"Moon\",\"surfaceArea\""
 				+ ":1111,\"mass\":11,\"naturalSatellite\":true}";
-		System.out.println(responseEntity.getBody());
 		assertEquals(expected, responseEntity.getBody());
 
 	}

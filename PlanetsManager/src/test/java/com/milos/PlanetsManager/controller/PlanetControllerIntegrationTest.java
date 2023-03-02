@@ -61,7 +61,6 @@ public class PlanetControllerIntegrationTest {
 		Planet planet = new Planet(1234L, "", 111L, 111L, 111L, 111, new HashSet<>());
 		ResponseEntity<String> responseEntity = this.restTemplate.postForEntity(createURLWithPort("/planet"), planet,
 				String.class);
-		System.out.println(responseEntity.getBody());
 		assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
 
 	}
@@ -100,7 +99,6 @@ public class PlanetControllerIntegrationTest {
 				createURLWithPort("/planet?pageSize=1&pageNo=0&sortBy=ASC"), HttpMethod.GET, entity, String.class);
 		String expected = "[{\"id\":1,\"name\":\"Planet test\",\"surfaceArea\":111,\""
 				+ "mass\":111,\"distanceFromSun\":111,\"averageSurfaceTemperature\"" + ":111,\"satellites\":[]}]";
-		System.out.println(responseEntity.getBody());
 		assertEquals(expected, responseEntity.getBody());
 	}
 
